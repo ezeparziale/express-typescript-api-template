@@ -1,0 +1,15 @@
+{
+  "name": "express-typescript-api-template",
+  "version": "1.0.0",
+  "description": "Api template with express and typescript",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "5.0.4"
+  }
+}
