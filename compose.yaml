@@ -1,0 +1,55 @@
+services:
+
+  server-api:
+    build:
+      context: .
+    environment:
+      NODE_ENV: production
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    networks:
+      - express_typescript_net
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:15.3
+    hostname: postgres_db
+    container_name: postgres_db
+    restart: always
+    user: ${POSTGRES_USER}
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    networks:
+      - express_typescript_net
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  adminer:
+    image: adminer:4.8.1
+    hostname: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - express_typescript_net
+
+volumes:
+  postgres-db:
+
+networks:
+  express_typescript_net:
+    name: express_typeexpress_typescript_netscript_demo_net
