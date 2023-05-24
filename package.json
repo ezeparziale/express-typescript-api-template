@@ -2,7 +2,7 @@
   "name": "express-typescript-api-template",
   "version": "1.0.0",
   "description": "Api template with express and typescript",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node build/server.js",
     "dev": "ts-node-dev server.ts",
