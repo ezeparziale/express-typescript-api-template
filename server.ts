@@ -3,5 +3,5 @@ import { PORT } from './src/configs/general.config'
 
 // Server
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port ${PORT}`)
 })
