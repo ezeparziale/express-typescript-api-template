@@ -1,6 +1,5 @@
 import app from './src/app'
-
-const PORT = 3000
+import { PORT } from './src/configs/general.config'
 
 // Server
 app.listen(PORT, () => {
