@@ -7,6 +7,10 @@
     "start": "node build/server.js",
     "dev": "ts-node-dev server.ts",
     "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix",
+    "format:check": "prettier --ignore-path .gitignore --check \"**/*.+(js|ts|json)\"",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "@ezeparziale",
