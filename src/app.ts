@@ -1,6 +1,7 @@
 import express from 'express'
 import cors, { CorsOptions } from 'cors'
 import morgan from 'morgan'
+import bodyParser from 'body-parser'
 import { BACKEND_CORS_ORIGINS } from './configs/general.config'
 import healthRouter from './routes/health.router'
 
@@ -15,6 +16,7 @@ const corsOptions: CorsOptions = {
 }
 app.use(cors(corsOptions))
 app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json())
 
 // Routes
