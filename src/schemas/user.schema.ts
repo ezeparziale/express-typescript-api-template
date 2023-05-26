@@ -5,6 +5,4 @@ const userSchema = Joi.object({
   password: Joi.string().min(8).required(),
 }).options({ allowUnknown: false })
 
-const userCreateSchema = userSchema.keys({})
-
-export = { userCreateSchema }
+export const userCreateSchema = userSchema

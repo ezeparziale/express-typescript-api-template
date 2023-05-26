@@ -5,12 +5,10 @@ const postSchema = Joi.object({
   content: Joi.string().required(),
 }).options({ allowUnknown: false })
 
-const postCreateSchema = postSchema.keys({
+export const postCreateSchema = postSchema.keys({
   published: Joi.boolean().default(false),
 })
 
-const postEditSchema = postSchema.keys({
+export const postEditSchema = postSchema.keys({
   published: Joi.boolean().required(),
 })
-
-exports = { postCreateSchema, postEditSchema }
