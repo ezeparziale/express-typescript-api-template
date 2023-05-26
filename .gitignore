@@ -131,3 +131,6 @@ dist
 
 # typescript build folder
 /build
+
+# VSCode
+**/.vscode
