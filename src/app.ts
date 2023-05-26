@@ -4,6 +4,10 @@ import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import { BACKEND_CORS_ORIGINS } from './configs/general.config'
 import healthRouter from './routes/health.router'
+import postRouter from './routes/post.router'
+import userRouter from './routes/user.router'
+import authRouter from './routes/auth.router'
+import voteRouter from './routes/vote.router'
 
 const app = express()
 
@@ -31,5 +35,9 @@ app.use(
 
 // Routes
 app.use('/health', healthRouter)
+app.use('/api/v1/posts', postRouter)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/vote', voteRouter)
 
 export default app
