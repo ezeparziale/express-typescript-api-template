@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { Request, Response } from 'express'
 import cors, { CorsOptions } from 'cors'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
@@ -17,14 +17,19 @@ const corsOptions: CorsOptions = {
 app.use(cors(corsOptions))
 app.use(morgan('dev'))
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(express.json())
+app.use(
+  express.json({
+    verify: (_req: Request, res: Response, buf: Buffer, encoding: BufferEncoding) => {
+      try {
+        JSON.parse(buf.toString(encoding))
+      } catch (e) {
+        res.status(400).json({ message: 'Invalid JSON' })
+      }
+    },
+  }),
+)
 
 // Routes
-app.get('/ping', (_, res) => {
-  console.log('Process ping request')
-  res.send('pong')
-})
-
 app.use('/health', healthRouter)
 
 export default app
