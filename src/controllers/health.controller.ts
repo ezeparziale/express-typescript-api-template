@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import * as packageJson from '../../package.json'
+import packageJson from '../../package.json'
 
 const getHealthStatus = async (_req: Request, res: Response) => {
   const response = {
