@@ -12,6 +12,9 @@ const sequelize = new Sequelize(POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, {
   host: POSTGRES_HOSTNAME,
   port: POSTGRES_PORT,
   dialect: 'postgres',
+  dialectOptions: {
+    ssl: true,
+  },
   logging: false,
 })
 
