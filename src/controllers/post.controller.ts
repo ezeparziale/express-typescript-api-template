@@ -94,8 +94,6 @@ const createNewPost = async (
   res: Response,
 ): Promise<Response> => {
   const authorId = req.userId
-  console.log(req.userId)
-  // const authorId = 1
   try {
     const newPost = await Post.create({ ...req.body, authorId })
     return res.status(201).json({
