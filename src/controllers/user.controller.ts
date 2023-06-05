@@ -2,8 +2,7 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import User from '../models/user.model'
 import { RequestWithUserId } from '../interfaces/request.interface'
-
-const saltRounds = 10
+import { SALT } from '../configs/general.config'
 
 const getAllUser = async (req: Request, res: Response): Promise<Response> => {
   const page: number = Number(req.query.page) || 1
@@ -68,7 +67,7 @@ const createNewUser = async (req: Request, res: Response): Promise<Response> => 
       return res.status(409).json({ message: 'User already exists' })
     }
 
-    const passwordHash = await bcrypt.hash(password, saltRounds)
+    const passwordHash = await bcrypt.hash(password, SALT)
     const newUser = await User.create({
       email,
       password: passwordHash,
@@ -95,7 +94,7 @@ const updateOneUser = async (req: Request, res: Response): Promise<Response> => 
   const id = req.params.userId
   const { email, password } = req.body
 
-  const passwordHash = await bcrypt.hash(password, saltRounds)
+  const passwordHash = await bcrypt.hash(password, SALT)
 
   try {
     const user = await User.findOne({ where: { id } })

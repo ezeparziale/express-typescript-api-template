@@ -2,8 +2,7 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcrypt'
 import User from '../models/user.model'
 import { createAccessToken } from '../utils/jwt.util'
-
-const saltRounds = 10
+import { SALT } from '../configs/general.config'
 
 const loginUser = async (req: Request, res: Response): Promise<Response> => {
   const { username, password } = req.body
@@ -45,7 +44,7 @@ const registerUser = async (req: Request, res: Response): Promise<Response> => {
       return res.status(409).json({ message: 'User already exists' })
     }
 
-    const passwordHash = await bcrypt.hash(req.body.password, saltRounds)
+    const passwordHash = await bcrypt.hash(req.body.password, SALT)
 
     const newUser = await User.create({
       email: username,

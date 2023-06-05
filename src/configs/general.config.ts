@@ -6,6 +6,9 @@ dotenv.config()
 export const PORT: number = Number(process.env.PORT) || 3000
 export const BACKEND_CORS_ORIGINS: string = process.env.BACKEND_CORS_ORIGINS || '*'
 
+// Bcrypt
+export const SALT: number = Number(process.env.SALT) || 10
+
 // Jwt
 export const SECRET_KEY: string = process.env.SECRET_KEY || ''
 export const ALGORITHM: string = process.env.ALGORITHM || 'HS256'
