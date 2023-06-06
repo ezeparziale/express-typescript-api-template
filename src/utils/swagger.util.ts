@@ -10,7 +10,7 @@ const options = {
       description: 'Test API',
     },
   },
-  apis: ['./src/routes/*.js'],
+  apis: ['./src/routes/*.ts'],
 }
 
 export const swaggerSpec = swaggerJsdoc(options)
