@@ -8,6 +8,8 @@ import postRouter from './routes/post.router'
 import userRouter from './routes/user.router'
 import authRouter from './routes/auth.router'
 import voteRouter from './routes/vote.router'
+import { swaggerSpec } from './utils/swagger.util'
+import swaggerUi from 'swagger-ui-express'
 
 const app = express()
 
@@ -32,6 +34,9 @@ app.use(
     },
   }),
 )
+
+// Swagger
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 
 // Routes
 app.use('/health', healthRouter)
