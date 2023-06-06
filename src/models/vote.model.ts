@@ -8,30 +8,31 @@ import {
 import sequelize from '../configs/db.config'
 
 class Vote extends Model<InferAttributes<Vote>, InferCreationAttributes<Vote>> {
-  declare userId: number
-  declare postId: number
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare user_id: number
+  declare post_id: number
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 }
 
 Vote.init(
   {
-    userId: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
     },
-    postId: {
+    post_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    created_at: DataTypes.DATE,
+    updated_at: DataTypes.DATE,
   },
   {
     sequelize,
     tableName: 'votes',
+    underscored: true,
   },
 )
 

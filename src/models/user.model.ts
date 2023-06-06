@@ -13,8 +13,8 @@ class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: CreationOptional<number>
   declare email: string
   declare password: string
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 }
 
 User.init(
@@ -36,29 +36,30 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    created_at: DataTypes.DATE,
+    updated_at: DataTypes.DATE,
   },
   {
     sequelize,
     tableName: 'users',
+    underscored: true,
   },
 )
 
 User.hasMany(Post, {
   as: 'author',
-  foreignKey: 'authorId',
+  foreignKey: 'author_id',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 })
-Post.belongsTo(User, { foreignKey: 'authorId' })
+Post.belongsTo(User, { foreignKey: 'author_id' })
 
 User.hasMany(Vote, {
   as: 'user',
-  foreignKey: 'userId',
+  foreignKey: 'user_id',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 })
-Vote.belongsTo(User, { foreignKey: 'userId' })
+Vote.belongsTo(User, { foreignKey: 'user_id' })
 
 export default User

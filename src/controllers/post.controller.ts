@@ -14,9 +14,9 @@ const getAllPosts = async (req: Request, res: Response): Promise<Response> => {
     const posts = await Post.findAll({
       limit,
       offset,
-      order: [['createdAt', 'DESC']],
+      order: [['created_at', 'DESC']],
       attributes: {
-        include: [[Sequelize.fn('COUNT', Sequelize.col('vote.postId')), 'votes']],
+        include: [[Sequelize.fn('COUNT', Sequelize.col('vote.post_id')), 'votes']],
       },
       include: [
         {
@@ -55,7 +55,7 @@ const getSinglePost = async (req: Request, res: Response): Promise<Response> => 
     const post = await Post.findOne({
       where: { id },
       attributes: {
-        include: [[Sequelize.fn('COUNT', Sequelize.col('vote.postId')), 'votes']],
+        include: [[Sequelize.fn('COUNT', Sequelize.col('vote.post_id')), 'votes']],
       },
       include: [
         {
@@ -95,7 +95,7 @@ const createNewPost = async (
 ): Promise<Response> => {
   const authorId = req.userId
   try {
-    const newPost = await Post.create({ ...req.body, authorId })
+    const newPost = await Post.create({ ...req.body, author_id: authorId })
     return res.status(201).json({
       message: 'Post created',
       postId: newPost.id,

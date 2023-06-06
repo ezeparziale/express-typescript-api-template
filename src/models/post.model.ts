@@ -13,9 +13,9 @@ class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
   declare title: string
   declare content: string
   declare published: boolean
-  declare authorId: number
-  declare createdAt: CreationOptional<Date>
-  declare updatedAt: CreationOptional<Date>
+  declare author_id: number
+  declare created_at: CreationOptional<Date>
+  declare updated_at: CreationOptional<Date>
 }
 
 Post.init(
@@ -38,25 +38,26 @@ Post.init(
       allowNull: false,
       defaultValue: false,
     },
-    authorId: {
+    author_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    createdAt: DataTypes.DATE,
-    updatedAt: DataTypes.DATE,
+    created_at: DataTypes.DATE,
+    updated_at: DataTypes.DATE,
   },
   {
     sequelize,
     tableName: 'posts',
+    underscored: true,
   },
 )
 
 Post.hasMany(Vote, {
   as: 'vote',
-  foreignKey: 'postId',
+  foreignKey: 'post_id',
   onDelete: 'CASCADE',
   onUpdate: 'CASCADE',
 })
-Vote.belongsTo(Post, { foreignKey: 'postId', as: 'vote' })
+Vote.belongsTo(Post, { foreignKey: 'post_id', as: 'vote' })
 
 export default Post

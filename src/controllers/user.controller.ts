@@ -13,7 +13,7 @@ const getAllUser = async (req: Request, res: Response): Promise<Response> => {
     const posts = await User.findAll({
       limit,
       offset,
-      order: [['createdAt', 'DESC']],
+      order: [['created_at', 'DESC']],
       attributes: ['id', 'email'],
     })
     return res.status(200).json(posts)
