@@ -28,7 +28,7 @@ app.use(
     verify: (_req: Request, res: Response, buf: Buffer, encoding: BufferEncoding) => {
       try {
         JSON.parse(buf.toString(encoding))
-      } catch (e) {
+      } catch {
         res.status(400).json({ message: "Invalid JSON" })
       }
     },

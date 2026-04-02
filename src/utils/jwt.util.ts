@@ -17,7 +17,7 @@ export const verifyToken = (token: string): string | object | null => {
   try {
     const decoded = jwt.verify(token, SECRET_KEY)
     return decoded
-  } catch (error) {
+  } catch {
     return null
   }
 }
