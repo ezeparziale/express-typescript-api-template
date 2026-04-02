@@ -1,9 +1,11 @@
 {
   "semi": false,
   "trailingComma": "all",
-  "singleQuote": true,
+  "singleQuote": false,
   "printWidth": 88,
   "tabWidth": 2,
   "useTabs": false,
-  "quoteProps": "as-needed"
+  "quoteProps": "as-needed",
+  "proseWrap": "always",
+  "endOfLine": "lf"
 }
