@@ -1,9 +1,9 @@
-import { Request, Response } from 'express'
-import { Sequelize } from 'sequelize'
-import Post from '../models/post.model'
-import User from '../models/user.model'
-import Vote from '../models/vote.model'
-import { RequestWithUserId } from '../interfaces/request.interface'
+import { Request, Response } from "express"
+import { Sequelize } from "sequelize"
+import Post from "../models/post.model"
+import User from "../models/user.model"
+import Vote from "../models/vote.model"
+import { RequestWithUserId } from "../interfaces/request.interface"
 
 const getAllPosts = async (req: Request, res: Response): Promise<Response> => {
   const page: number = Number(req.query.page) || 1
@@ -14,35 +14,35 @@ const getAllPosts = async (req: Request, res: Response): Promise<Response> => {
     const posts = await Post.findAll({
       limit,
       offset,
-      order: [['created_at', 'DESC']],
+      order: [["created_at", "DESC"]],
       attributes: {
-        include: [[Sequelize.fn('COUNT', Sequelize.col('vote.post_id')), 'votes']],
+        include: [[Sequelize.fn("COUNT", Sequelize.col("vote.post_id")), "votes"]],
       },
       include: [
         {
           model: User,
-          attributes: ['id', 'email'],
+          attributes: ["id", "email"],
           required: false,
         },
         {
           model: Vote,
           attributes: [],
           duplicating: false,
-          as: 'vote',
+          as: "vote",
         },
       ],
-      group: ['Post.id', 'User.id'],
+      group: ["Post.id", "User.id"],
     })
     return res.status(200).json(posts)
   } catch (error) {
     if (error instanceof Error) {
       console.error(error)
       return res.status(500).json({
-        message: 'An error occurred while retrieving posts',
+        message: "An error occurred while retrieving posts",
         error: error.message,
       })
     } else {
-      console.error('Unexpected error: ', error)
+      console.error("Unexpected error: ", error)
       throw error
     }
   }
@@ -55,20 +55,20 @@ const getSinglePost = async (req: Request, res: Response): Promise<Response> => 
     const post = await Post.findOne({
       where: { id },
       attributes: {
-        include: [[Sequelize.fn('COUNT', Sequelize.col('vote.post_id')), 'votes']],
+        include: [[Sequelize.fn("COUNT", Sequelize.col("vote.post_id")), "votes"]],
       },
       include: [
         {
           model: User,
-          attributes: ['id', 'email'],
+          attributes: ["id", "email"],
         },
         {
           model: Vote,
           attributes: [],
-          as: 'vote',
+          as: "vote",
         },
       ],
-      group: ['Post.id', 'User.id'],
+      group: ["Post.id", "User.id"],
     })
     if (post) {
       return res.status(200).json(post)
@@ -79,11 +79,11 @@ const getSinglePost = async (req: Request, res: Response): Promise<Response> => 
     if (error instanceof Error) {
       console.error(error)
       return res.status(500).json({
-        message: 'An error occurred while retrieving the post',
+        message: "An error occurred while retrieving the post",
         error: error.message,
       })
     } else {
-      console.error('Unexpected error: ', error)
+      console.error("Unexpected error: ", error)
       throw error
     }
   }
@@ -97,18 +97,18 @@ const createNewPost = async (
   try {
     const newPost = await Post.create({ ...req.body, author_id: authorId })
     return res.status(201).json({
-      message: 'Post created',
+      message: "Post created",
       postId: newPost.id,
     })
   } catch (error) {
     if (error instanceof Error) {
       console.error(error)
       return res.status(500).json({
-        message: 'Error creating post',
+        message: "Error creating post",
         error: error.message,
       })
     } else {
-      console.error('Unexpected error: ', error)
+      console.error("Unexpected error: ", error)
       throw error
     }
   }
@@ -122,7 +122,7 @@ const updateOnePost = async (req: Request, res: Response): Promise<Response> => 
 
     if (post) {
       await Post.update(req.body, { where: { id } })
-      return res.status(200).json({ message: 'Post updated' })
+      return res.status(200).json({ message: "Post updated" })
     } else {
       return res.status(404).send()
     }
@@ -130,11 +130,11 @@ const updateOnePost = async (req: Request, res: Response): Promise<Response> => 
     if (error instanceof Error) {
       console.error(error)
       return res.status(500).json({
-        message: 'Error updating post',
+        message: "Error updating post",
         error: error.message,
       })
     } else {
-      console.error('Unexpected error: ', error)
+      console.error("Unexpected error: ", error)
       throw error
     }
   }
@@ -145,7 +145,7 @@ const deleteOnePost = async (req: Request, res: Response): Promise<Response> => 
   try {
     const deletePost = await Post.destroy({ where: { id } })
     if (deletePost) {
-      return res.status(204).json({ message: 'Post deleted' })
+      return res.status(204).json({ message: "Post deleted" })
     } else {
       return res.status(404).send()
     }
@@ -153,11 +153,11 @@ const deleteOnePost = async (req: Request, res: Response): Promise<Response> => 
     if (error instanceof Error) {
       console.error(error)
       return res.status(500).json({
-        message: 'Error deleting post',
+        message: "Error deleting post",
         error: error.message,
       })
     } else {
-      console.error('Unexpected error: ', error)
+      console.error("Unexpected error: ", error)
       throw error
     }
   }

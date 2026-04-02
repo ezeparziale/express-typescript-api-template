@@ -1,5 +1,5 @@
-import express, { Router } from 'express'
-import { getHealthStatus } from '../controllers/health.controller'
+import express, { Router } from "express"
+import { getHealthStatus } from "../controllers/health.controller"
 
 const router: Router = express.Router()
 
@@ -37,6 +37,6 @@ const router: Router = express.Router()
  *                   example: 1234.56789
  *                   description: Represents the API's uptime in seconds.
  */
-router.get('/', getHealthStatus)
+router.get("/", getHealthStatus)
 
 export default router

@@ -1,5 +1,5 @@
-import { Router } from 'express'
-import authController from '../controllers/auth.controller'
+import { Router } from "express"
+import authController from "../controllers/auth.controller"
 
 const router = Router()
 
@@ -88,7 +88,7 @@ const router = Router()
  *                   type: string
  *                   example: Error login user
  */
-router.post('/login', authController.loginUser)
+router.post("/login", authController.loginUser)
 
 /**
  * @swagger
@@ -142,6 +142,6 @@ router.post('/login', authController.loginUser)
  *                   type: string
  *                   example: An error occurred while creating a user
  */
-router.post('/register', authController.registerUser)
+router.post("/register", authController.registerUser)
 
 export default router

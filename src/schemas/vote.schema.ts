@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import Joi from "joi"
 
 const voteSchema = Joi.object({
   postId: Joi.number().required(),

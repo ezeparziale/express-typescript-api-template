@@ -4,9 +4,9 @@ import {
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
-} from 'sequelize'
-import sequelize from '../configs/db.config'
-import Vote from './vote.model'
+} from "sequelize"
+import sequelize from "../configs/db.config"
+import Vote from "./vote.model"
 
 class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
   declare id: CreationOptional<number>
@@ -47,17 +47,17 @@ Post.init(
   },
   {
     sequelize,
-    tableName: 'posts',
+    tableName: "posts",
     underscored: true,
   },
 )
 
 Post.hasMany(Vote, {
-  as: 'vote',
-  foreignKey: 'post_id',
-  onDelete: 'CASCADE',
-  onUpdate: 'CASCADE',
+  as: "vote",
+  foreignKey: "post_id",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE",
 })
-Vote.belongsTo(Post, { foreignKey: 'post_id', as: 'vote' })
+Vote.belongsTo(Post, { foreignKey: "post_id", as: "vote" })
 
 export default Post

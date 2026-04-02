@@ -1,16 +1,16 @@
-import swaggerJsdoc from 'swagger-jsdoc'
-import packageJson from '../../package.json'
+import swaggerJsdoc from "swagger-jsdoc"
+import packageJson from "../../package.json"
 
 const options = {
   definition: {
-    openapi: '3.0.0',
+    openapi: "3.0.0",
     info: {
-      title: 'Template API NodeJS+Express+Typescript',
+      title: "Template API NodeJS+Express+Typescript",
       version: packageJson.version,
-      description: 'Test API',
+      description: "Test API",
     },
   },
-  apis: ['./src/routes/*.ts'],
+  apis: ["./src/routes/*.ts"],
 }
 
 export const swaggerSpec = swaggerJsdoc(options)

@@ -1,9 +1,9 @@
-import jwt, { Secret, Algorithm } from 'jsonwebtoken'
+import jwt, { Secret, Algorithm } from "jsonwebtoken"
 import {
   SECRET_KEY,
   ALGORITHM,
   ACCESS_TOKEN_EXPIRE_MINUTES,
-} from '../configs/general.config'
+} from "../configs/general.config"
 
 export const createAccessToken = (payload: string | object): string => {
   const token = jwt.sign(payload, SECRET_KEY as Secret, {

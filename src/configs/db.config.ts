@@ -1,4 +1,4 @@
-import { Sequelize } from 'sequelize'
+import { Sequelize } from "sequelize"
 
 import {
   POSTGRES_HOSTNAME,
@@ -6,12 +6,12 @@ import {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
   POSTGRES_PORT,
-} from './general.config'
+} from "./general.config"
 
 const sequelize = new Sequelize(POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, {
   host: POSTGRES_HOSTNAME,
   port: POSTGRES_PORT,
-  dialect: 'postgres',
+  dialect: "postgres",
   logging: false,
 })
 

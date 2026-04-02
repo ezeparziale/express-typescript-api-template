@@ -4,8 +4,8 @@ import {
   InferAttributes,
   InferCreationAttributes,
   CreationOptional,
-} from 'sequelize'
-import sequelize from '../configs/db.config'
+} from "sequelize"
+import sequelize from "../configs/db.config"
 
 class Vote extends Model<InferAttributes<Vote>, InferCreationAttributes<Vote>> {
   declare user_id: number
@@ -31,7 +31,7 @@ Vote.init(
   },
   {
     sequelize,
-    tableName: 'votes',
+    tableName: "votes",
     underscored: true,
   },
 )
