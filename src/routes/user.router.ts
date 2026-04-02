@@ -169,6 +169,7 @@ router.get("/:userId", requireAuth, userController.getOneUser)
  * /api/v1/users/{userId}:
  *   put:
  *     summary: Update a user by ID
+ *     description: Update a user. Only the user themselves can perform this action.
  *     tags: [Users]
  *     security:
  *       - BearerAuth: []
@@ -196,6 +197,8 @@ router.get("/:userId", requireAuth, userController.getOneUser)
  *         description: Bad request
  *       401:
  *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - Only the user can update their own profile
  *       404:
  *         description: User not found
  *       500:
@@ -213,6 +216,7 @@ router.put(
  * /api/v1/users/{userId}:
  *   delete:
  *     summary: Delete a user by ID
+ *     description: Delete a user. Only the user themselves can perform this action.
  *     tags: [Users]
  *     security:
  *       - BearerAuth: []
@@ -228,6 +232,8 @@ router.put(
  *         description: User deleted successfully
  *       401:
  *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - Only the user can delete their own profile
  *       404:
  *         description: User not found
  *       500:

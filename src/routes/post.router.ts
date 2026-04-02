@@ -176,6 +176,7 @@ router.get("/:postId", requireAuth, postController.getSinglePost)
  * /api/v1/posts/{postId}:
  *   put:
  *     summary: Update a post by ID
+ *     description: Update a post. Only the author of the post can perform this action.
  *     tags: [Posts]
  *     security:
  *       - BearerAuth: []
@@ -203,6 +204,8 @@ router.get("/:postId", requireAuth, postController.getSinglePost)
  *         description: Bad request
  *       401:
  *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - Only the author can update this post
  *       404:
  *         description: Post not found
  *       500:
@@ -220,6 +223,7 @@ router.put(
  * /api/v1/posts/{postId}:
  *   delete:
  *     summary: Delete a post by ID
+ *     description: Delete a post. Only the author of the post can perform this action.
  *     tags: [Posts]
  *     security:
  *       - BearerAuth: []
@@ -235,6 +239,8 @@ router.put(
  *         description: Post deleted successfully
  *       401:
  *         description: Unauthorized
+ *       403:
+ *         description: Forbidden - Only the author can delete this post
  *       404:
  *         description: Post not found
  *       500:

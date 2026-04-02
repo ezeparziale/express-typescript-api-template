@@ -90,16 +90,25 @@ const createNewUser = async (req: Request, res: Response): Promise<Response> => 
   }
 }
 
-const updateOneUser = async (req: Request, res: Response): Promise<Response> => {
+const updateOneUser = async (
+  req: RequestWithUserId,
+  res: Response,
+): Promise<Response> => {
   const id = req.params.userId
+  const authenticatedUserId = req.userId
   const { email, password } = req.body
 
-  const passwordHash = await bcrypt.hash(password, SALT)
+  if (Number(id) !== authenticatedUserId) {
+    return res
+      .status(403)
+      .json({ message: "Only the user can update their own profile" })
+  }
 
   try {
     const user = await User.findOne({ where: { id } })
 
     if (user) {
+      const passwordHash = await bcrypt.hash(password, SALT)
       await User.update(
         {
           email,
@@ -125,8 +134,19 @@ const updateOneUser = async (req: Request, res: Response): Promise<Response> => 
   }
 }
 
-const deleteOneUser = async (req: Request, res: Response): Promise<Response> => {
+const deleteOneUser = async (
+  req: RequestWithUserId,
+  res: Response,
+): Promise<Response> => {
   const id = req.params.userId
+  const authenticatedUserId = req.userId
+
+  if (Number(id) !== authenticatedUserId) {
+    return res
+      .status(403)
+      .json({ message: "Only the user can delete their own profile" })
+  }
+
   try {
     const deleteUser = await User.destroy({ where: { id } })
     if (deleteUser) {

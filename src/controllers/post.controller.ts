@@ -114,18 +114,26 @@ const createNewPost = async (
   }
 }
 
-const updateOnePost = async (req: Request, res: Response): Promise<Response> => {
+const updateOnePost = async (
+  req: RequestWithUserId,
+  res: Response,
+): Promise<Response> => {
   const id = req.params.postId
+  const userId = req.userId
 
   try {
     const post = await Post.findOne({ where: { id } })
 
-    if (post) {
-      await Post.update(req.body, { where: { id } })
-      return res.status(200).json({ message: "Post updated" })
-    } else {
+    if (!post) {
       return res.status(404).send()
     }
+
+    if (post.author_id !== userId) {
+      return res.status(403).json({ message: "Only the author can update this post" })
+    }
+
+    await Post.update(req.body, { where: { id } })
+    return res.status(200).json({ message: "Post updated" })
   } catch (error) {
     if (error instanceof Error) {
       console.error(error)
@@ -140,15 +148,25 @@ const updateOnePost = async (req: Request, res: Response): Promise<Response> => 
   }
 }
 
-const deleteOnePost = async (req: Request, res: Response): Promise<Response> => {
+const deleteOnePost = async (
+  req: RequestWithUserId,
+  res: Response,
+): Promise<Response> => {
   const id = req.params.postId
+  const userId = req.userId
   try {
-    const deletePost = await Post.destroy({ where: { id } })
-    if (deletePost) {
-      return res.status(204).json({ message: "Post deleted" })
-    } else {
+    const post = await Post.findOne({ where: { id } })
+
+    if (!post) {
       return res.status(404).send()
     }
+
+    if (post.author_id !== userId) {
+      return res.status(403).json({ message: "Only the author can delete this post" })
+    }
+
+    await post.destroy()
+    return res.status(204).send()
   } catch (error) {
     if (error instanceof Error) {
       console.error(error)
