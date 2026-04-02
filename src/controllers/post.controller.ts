@@ -73,7 +73,7 @@ const getSinglePost = async (req: Request, res: Response): Promise<Response> => 
     if (post) {
       return res.status(200).json(post)
     } else {
-      return res.status(404).send()
+      return res.status(404).json({ message: "Post not found" })
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -125,7 +125,7 @@ const updateOnePost = async (
     const post = await Post.findOne({ where: { id } })
 
     if (!post) {
-      return res.status(404).send()
+      return res.status(404).json({ message: "Post not found" })
     }
 
     if (post.author_id !== userId) {
@@ -158,7 +158,7 @@ const deleteOnePost = async (
     const post = await Post.findOne({ where: { id } })
 
     if (!post) {
-      return res.status(404).send()
+      return res.status(404).json({ message: "Post not found" })
     }
 
     if (post.author_id !== userId) {

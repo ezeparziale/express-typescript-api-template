@@ -42,7 +42,7 @@ const getOneUser = async (req: Request, res: Response): Promise<Response> => {
     if (user) {
       return res.status(200).json(user)
     } else {
-      return res.status(404).send()
+      return res.status(404).json({ message: "User not found" })
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -118,7 +118,7 @@ const updateOneUser = async (
       )
       return res.status(200).json({ message: "User updated" })
     } else {
-      return res.status(404).send()
+      return res.status(404).json({ message: "User not found" })
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -152,7 +152,7 @@ const deleteOneUser = async (
     if (deleteUser) {
       return res.status(204).json({ message: "User deleted successfully" })
     } else {
-      return res.status(404).send()
+      return res.status(404).json({ message: "User not found" })
     }
   } catch (error) {
     if (error instanceof Error) {
@@ -179,7 +179,7 @@ const getMe = async (req: RequestWithUserId, res: Response): Promise<Response> =
     if (user) {
       return res.status(200).json(user)
     } else {
-      return res.status(404).send()
+      return res.status(404).json({ message: "User not found" })
     }
   } catch (error) {
     if (error instanceof Error) {
